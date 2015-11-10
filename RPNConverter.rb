@@ -3,6 +3,7 @@ class RPNConverter
   def infix_to_rpn(exp)
     @output = ''
     @stack = []
+    @res = []
     string = exp.gsub(' ', '')
     string.each_char do |char|
       case char
@@ -16,7 +17,10 @@ class RPNConverter
       @output << @stack.pop
     end
     @output.gsub(/[()]/, "")
-    return @output
+    @output.each_char do |c|
+      @res.push(c)
+    end
+      return @res
   end
 
   def precedence(op)
